@@ -33,9 +33,17 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 	// https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.1'
+
+
 
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+bootRun {
+	String activeProfile = System.properties['spring.profiles.active']
+	systemProperty "spring.profiles.active", activeProfile
 }

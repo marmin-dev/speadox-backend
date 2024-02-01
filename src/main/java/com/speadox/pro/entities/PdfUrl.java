@@ -19,8 +19,9 @@ public class PdfUrl {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String url;
+    @OneToOne
+    @JoinColumn(name = "url")
+    private Product url;
 
     private String category;
 
