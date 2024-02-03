@@ -1,5 +1,6 @@
 package com.speadox.pro.repositories;
 
+import com.speadox.pro.dtos.ProductMainDto;
 import com.speadox.pro.entities.PdfUrl;
 import com.speadox.pro.entities.Product;
 import org.junit.jupiter.api.Test;
@@ -26,5 +27,6 @@ public class TestRepository {
         List<Product> products = productRepository.findAll();
         System.out.println(pdfs.size()  + "    " + products.size() );
     }
+
 
 }
