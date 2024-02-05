@@ -1,4 +1,4 @@
-package com.speadox.pro.daos;
+package com.speadox.pro.services;
 
 import com.speadox.pro.dtos.ProductMainDto;
 import org.junit.jupiter.api.Test;
@@ -8,18 +8,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-public class DaoTest {
+public class ProductServiceTest {
 
     @Autowired
-    private ProductDao productDao;
+    private ProductService service;
 
     @Test
-    public void testMain(){
-        List<ProductMainDto> dtos = productDao.getMainList("jbl");
-        System.out.println(dtos.get(1).getImageName() + "  :  " +dtos.get(1).getPName() + "  :  " +dtos.get(1).getPBrand());
+    public void testGetMainList(){
+        List<ProductMainDto> dtos = service.getMainList("jbl");
         System.out.println(dtos.size());
-
+        System.out.println(dtos.toString());
     }
+
+
 
 
 }

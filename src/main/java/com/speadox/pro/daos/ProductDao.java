@@ -15,11 +15,14 @@ public class ProductDao {
     private EntityManager entityManager;
 
     public List<ProductMainDto> getMainList(String company) {
+        // 메인 페이지 스피커 리스트
         TypedQuery<ProductMainDto> query = entityManager.createQuery(
-                "SELECT NEW com.speadox.pro.dtos.ProductMainDto(p.imageName, p.pName) FROM Product p WHERE p.pBrand = :company",
+                "SELECT NEW com.speadox.pro.dtos.ProductMainDto(p.imageName, p.pName, p.pBrand) FROM Product p WHERE p.pBrand = :company",
                 ProductMainDto.class
         );
         query.setParameter("company", company);
         return query.getResultList();
     }
+
+//    public List
 }

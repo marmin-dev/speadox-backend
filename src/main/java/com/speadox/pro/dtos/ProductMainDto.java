@@ -10,4 +10,6 @@ public class ProductMainDto {
     private String imageName;
 
     private String pName;
+
+    private String pBrand;
 }
