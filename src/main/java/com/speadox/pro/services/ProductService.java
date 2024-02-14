@@ -1,6 +1,7 @@
 package com.speadox.pro.services;
 
 import com.speadox.pro.daos.ProductDao;
+import com.speadox.pro.dtos.ProductListDto;
 import com.speadox.pro.dtos.ProductMainDto;
 import com.speadox.pro.repositories.PdfRepository;
 import com.speadox.pro.repositories.ProductRepository;
@@ -30,7 +31,7 @@ public class ProductService {
         try{
             List<ProductMainDto> dtos = productDao.getMainList(company);
             while(randomList.size() < 10){
-                Integer rand = random.nextInt(dtos.size() + 1);
+                int rand = random.nextInt(dtos.size() + 1);
                 if (randomList.contains(rand)){
                     continue;
                 }else{
@@ -48,10 +49,18 @@ public class ProductService {
         return newDtos;
     }
 
-
-
-
     // 리스트 페이지 가져오는 로직
+    public List<ProductListDto> getProductList(String category, int size){
+        List<ProductListDto> dtos = new ArrayList<>();
+        try{
+            dtos = productDao.getListData(category, size);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dtos;
+    }
+
+
 
     // 디테일 페이지 데이터 가져오는 로직
 

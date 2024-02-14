@@ -1,5 +1,6 @@
 package com.speadox.pro.controllers;
 
+import com.speadox.pro.dtos.ProductListDto;
 import com.speadox.pro.dtos.ProductMainDto;
 import com.speadox.pro.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,16 @@ public class ProductController {
     public ResponseEntity<List<ProductMainDto>> getMainList(@PathVariable String company){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pService.getMainList(company));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+        }
+    }
+
+    // 스피커 리스트 불러오는 로직
+    @GetMapping("list/{category}/{page}")
+    public ResponseEntity<List<ProductListDto>> getProductList (@PathVariable String category, @PathVariable int page){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(pService.getProductList(category, page));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
         }
