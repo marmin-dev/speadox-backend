@@ -18,6 +18,7 @@ public class PdfDao {
         // 디테일 페이지
         String queryString = "SELECT NEW com.speadox.pro.dtos.ProductPdfDetailDto" +
         "(pu.id," +
+                "pu.url.url,"+
                 "pu.filename," +
                 "pu.pName," +
                 "pu.url.category," +
