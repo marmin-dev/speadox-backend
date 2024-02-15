@@ -19,7 +19,7 @@ public class ProductDao {
     public List<ProductMainDto> getMainList(String company) {
         // 메인 페이지 스피커 리스트
         TypedQuery<ProductMainDto> query = entityManager.createQuery(
-                "SELECT NEW com.speadox.pro.dtos.ProductMainDto(p.imageName, p.pName, p.pBrand) FROM Product p WHERE p.pBrand = :company",
+                "SELECT NEW com.speadox.pro.dtos.ProductMainDto(p.imageName, p.pName, p.id, p.pBrand) FROM Product p WHERE p.pBrand = :company",
                 ProductMainDto.class
         );
         query.setParameter("company", company);
@@ -29,7 +29,7 @@ public class ProductDao {
     public List<ProductListDto> getListData(String category, int pageNumber){
         // 리스트 데이터 불러오는 쿼리 문
         int pageSize = 20;
-        String queryF = "SELECT NEW com.speadox.pro.dtos.ProductListDto(p.imageName, p.category, p.pName, p.pBrand, p.subDescription)" +
+        String queryF = "SELECT NEW com.speadox.pro.dtos.ProductListDto(p.imageName, p.category, p.pName, p.pBrand, p.id, p.subDescription)" +
                 "FROM Product p";
 
         String queryWHERE = "WHERE category= :category";
@@ -50,9 +50,8 @@ public class ProductDao {
         query.setFirstResult(firstResult);
         query.setMaxResults(pageSize);
 
-        // 결과 반환
         return query.getResultList();
 
-
     }
+
 }

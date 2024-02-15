@@ -40,4 +40,7 @@ public class Product {
     private String spec;
 
     private LocalDateTime reg_datetime;
+
+    @Column(unique = true)
+    private Long id;
 }

@@ -20,7 +20,7 @@ public class PdfUrl {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "url")
+    @JoinColumn(name = "url",referencedColumnName = "url")
     private Product url;
 
     private String category;

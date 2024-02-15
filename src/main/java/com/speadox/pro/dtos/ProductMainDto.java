@@ -11,5 +11,7 @@ public class ProductMainDto {
 
     private String pName;
 
+    private Long id;
+
     private String pBrand;
 }

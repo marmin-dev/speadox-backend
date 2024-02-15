@@ -15,6 +15,8 @@ public class ProductListDto {
 
     private String pBrand;
 
+    private Long id;
+
     private String subDescription;
 
 }
