@@ -32,5 +32,7 @@ public class ProductDto {
 
     private LocalDateTime reg_datetime;
 
+    private Long id;
+
 }
 

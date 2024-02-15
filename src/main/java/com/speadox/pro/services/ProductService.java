@@ -1,8 +1,10 @@
 package com.speadox.pro.services;
 
+import com.speadox.pro.daos.PdfDao;
 import com.speadox.pro.daos.ProductDao;
 import com.speadox.pro.dtos.ProductListDto;
 import com.speadox.pro.dtos.ProductMainDto;
+import com.speadox.pro.dtos.ProductPdfDetailDto;
 import com.speadox.pro.repositories.PdfRepository;
 import com.speadox.pro.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,7 @@ public class ProductService {
     private final ProductRepository pRepository;
     private final PdfRepository repository;
     private final ProductDao productDao;
-
+    private final PdfDao pdfDao;
 
     // 메인페이지 사진 가져오는 로직
     public List<ProductMainDto> getMainList(String company){
@@ -60,10 +62,16 @@ public class ProductService {
         return dtos;
     }
 
-
-
     // 디테일 페이지 데이터 가져오는 로직
-
+    public ProductPdfDetailDto getProductDetail(Long id){
+        ProductPdfDetailDto dto  = new ProductPdfDetailDto();
+        try{
+            dto = pdfDao.getProductDetail(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dto;
+    }
 
 
 }
