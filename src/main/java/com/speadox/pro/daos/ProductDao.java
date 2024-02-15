@@ -51,9 +51,34 @@ public class ProductDao {
         query.setMaxResults(pageSize);
 
         return query.getResultList();
-
     }
 
+    public List<ProductListDto> getListBySearch(String category, String keyword, int pageNumber){
+        // 검색으로 리스트 데이터 불러오는 로직
+        int pageSize = 20;
+        String queryString = "SELECT NEW com.speadox.pro.dtos.ProductListDto(p.imageName, p.category, p.pName, p.pBrand, p.id, p.subDescription)" +
+                "FROM Product p";
+        String queryW = "";
+        if(category.equals("brand")){
+            queryW = " WHERE pBrand like :keyword";
+        }
+        else if(category.equals("name")){
+            queryW = " WHERE pName like :keyword";
+        }
+        else if(category.equals("spec")){
+            queryW = " WHERE spec like :keyword";
+        }
+
+        TypedQuery<ProductListDto> query = entityManager.createQuery(queryString + queryW, ProductListDto.class);
+        query.setParameter("keyword", "%" + keyword + "%");
+
+        // 페이지네이션 설정
+        int firstResult = (pageNumber - 1) * pageSize; // 첫 번째 결과의 인덱스 계산
+        query.setFirstResult(firstResult);
+        query.setMaxResults(pageSize);
+
+        return query.getResultList();
+    }
 
 
 

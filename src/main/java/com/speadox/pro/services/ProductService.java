@@ -5,6 +5,7 @@ import com.speadox.pro.daos.ProductDao;
 import com.speadox.pro.dtos.ProductListDto;
 import com.speadox.pro.dtos.ProductMainDto;
 import com.speadox.pro.dtos.ProductPdfDetailDto;
+import com.speadox.pro.dtos.ProductSearchDto;
 import com.speadox.pro.repositories.PdfRepository;
 import com.speadox.pro.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -71,6 +72,16 @@ public class ProductService {
             e.printStackTrace();
         }
         return dto;
+    }
+
+    public List<ProductListDto> getProductListBySearch(ProductSearchDto dto, int page){
+        List<ProductListDto> dtos = new ArrayList<>();
+        try{
+            dtos = productDao.getListBySearch(dto.getCategory(), dto.getKeyword(), page);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dtos;
     }
 
 
