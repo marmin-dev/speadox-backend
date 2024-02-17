@@ -1,9 +1,6 @@
 package com.speadox.pro.controllers;
 
-import com.speadox.pro.dtos.ProductListDto;
-import com.speadox.pro.dtos.ProductMainDto;
-import com.speadox.pro.dtos.ProductPdfDetailDto;
-import com.speadox.pro.dtos.ProductSearchDto;
+import com.speadox.pro.dtos.*;
 import com.speadox.pro.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,11 +29,11 @@ public class ProductController {
 
     // 기기 리스트 불러오는 로직
     @GetMapping("/list/{category}/{page}")
-    public ResponseEntity<List<ProductListDto>> getProductList (@PathVariable String category, @PathVariable int page){
+    public ResponseEntity<ProductListPageSizeDto> getProductList (@PathVariable String category, @PathVariable int page){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pService.getProductList(category, page));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ProductListPageSizeDto());
         }
     }
 
@@ -51,11 +48,11 @@ public class ProductController {
     }
     // 기기 검색하는 로직
     @PostMapping("/search/{page}")
-    public ResponseEntity<List<ProductListDto>> getProductBySearch(@PathVariable int page, @RequestBody ProductSearchDto dto){
+    public ResponseEntity<ProductListPageSizeDto> getProductBySearch(@PathVariable int page, @RequestBody ProductSearchDto dto){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pService.getProductListBySearch(dto, page));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ProductListPageSizeDto());
         }
     }
 }

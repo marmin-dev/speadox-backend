@@ -1,6 +1,7 @@
 package com.speadox.pro.daos;
 
 import com.speadox.pro.dtos.ProductListDto;
+import com.speadox.pro.dtos.ProductListPageSizeDto;
 import com.speadox.pro.dtos.ProductMainDto;
 import com.speadox.pro.entities.Product;
 import jakarta.persistence.EntityManager;
@@ -26,7 +27,7 @@ public class ProductDao {
         return query.getResultList();
     }
 
-    public List<ProductListDto> getListData(String category, int pageNumber){
+    public ProductListPageSizeDto getListData(String category, int pageNumber){
         // 리스트 데이터 불러오는 쿼리 문
         int pageSize = 20;
         String queryF = "SELECT NEW com.speadox.pro.dtos.ProductListDto(p.imageName, p.category, p.pName, p.pBrand, p.id, p.subDescription)" +
@@ -47,13 +48,14 @@ public class ProductDao {
         }
         // 페이지네이션 설정
         int firstResult = (pageNumber - 1) * pageSize; // 첫 번째 결과의 인덱스 계산
+        int maxPage = query.getResultList().size();
         query.setFirstResult(firstResult);
         query.setMaxResults(pageSize);
 
-        return query.getResultList();
+        return new ProductListPageSizeDto(maxPage, query.getResultList());
     }
 
-    public List<ProductListDto> getListBySearch(String category, String keyword, int pageNumber){
+    public ProductListPageSizeDto getListBySearch(String category, String keyword, int pageNumber){
         // 검색으로 리스트 데이터 불러오는 로직
         int pageSize = 20;
         String queryString = "SELECT NEW com.speadox.pro.dtos.ProductListDto(p.imageName, p.category, p.pName, p.pBrand, p.id, p.subDescription)" +
@@ -74,10 +76,11 @@ public class ProductDao {
 
         // 페이지네이션 설정
         int firstResult = (pageNumber - 1) * pageSize; // 첫 번째 결과의 인덱스 계산
+        int maxPage = query.getResultList().size();
         query.setFirstResult(firstResult);
         query.setMaxResults(pageSize);
 
-        return query.getResultList();
+        return new ProductListPageSizeDto(maxPage, query.getResultList());
     }
 
 

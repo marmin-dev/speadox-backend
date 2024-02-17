@@ -2,10 +2,7 @@ package com.speadox.pro.services;
 
 import com.speadox.pro.daos.PdfDao;
 import com.speadox.pro.daos.ProductDao;
-import com.speadox.pro.dtos.ProductListDto;
-import com.speadox.pro.dtos.ProductMainDto;
-import com.speadox.pro.dtos.ProductPdfDetailDto;
-import com.speadox.pro.dtos.ProductSearchDto;
+import com.speadox.pro.dtos.*;
 import com.speadox.pro.repositories.PdfRepository;
 import com.speadox.pro.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -53,14 +50,15 @@ public class ProductService {
     }
 
     // 리스트 페이지 가져오는 로직
-    public List<ProductListDto> getProductList(String category, int size){
-        List<ProductListDto> dtos = new ArrayList<>();
+    public ProductListPageSizeDto getProductList(String category, int page){
         try{
-            dtos = productDao.getListData(category, size);
+            ProductListPageSizeDto dto = productDao.getListData(category, page);
+            dto.setMaxPage((int) Math.ceil((double) dto.getMaxPage()/20));
+            return dto;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return dtos;
+        return new ProductListPageSizeDto();
     }
 
     // 디테일 페이지 데이터 가져오는 로직
@@ -74,14 +72,16 @@ public class ProductService {
         return dto;
     }
 
-    public List<ProductListDto> getProductListBySearch(ProductSearchDto dto, int page){
-        List<ProductListDto> dtos = new ArrayList<>();
+    // 검색된 페이지 가져오는 로직
+    public ProductListPageSizeDto getProductListBySearch(ProductSearchDto dto, int page){
         try{
-            dtos = productDao.getListBySearch(dto.getCategory(), dto.getKeyword(), page);
+            ProductListPageSizeDto pDto = productDao.getListBySearch(dto.getCategory(), dto.getKeyword(), page);
+            pDto.setMaxPage((int) Math.ceil((double) pDto.getMaxPage()/20));
+            return pDto;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return dtos;
+        return new ProductListPageSizeDto();
     }
 
 
