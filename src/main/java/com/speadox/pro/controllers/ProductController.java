@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/api/v1/product")
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin
 public class ProductController {
 
     private final ProductService pService;

@@ -30,7 +30,7 @@ public class ProductService {
         List<ProductMainDto> newDtos = new ArrayList<>();
         try{
             List<ProductMainDto> dtos = productDao.getMainList(company);
-            while(randomList.size() < 10){
+            while(randomList.size() < 9){
                 int rand = random.nextInt(dtos.size() + 1);
                 if (randomList.contains(rand)){
                     continue;
