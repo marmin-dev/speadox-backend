@@ -24,6 +24,7 @@ public class ProductController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pService.getMainList(company));
         }catch (Exception e){
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
         }
     }

@@ -17,18 +17,18 @@ public class PdfDao {
     public ProductPdfDetailDto getProductDetail(Long id){
         // 디테일 페이지
         String queryString = "SELECT NEW com.speadox.pro.dtos.ProductPdfDetailDto" +
-        "(pu.id," +
-                "pu.url.url,"+
-                "pu.filename," +
-                "pu.pName," +
-                "pu.url.category," +
-                "pu.url.description," +
-                "pu.url.imageName," +
-                "pu.url.pBrand," +
-                "pu.url.subDescription," +
-                "pu.url.spec) " +
-                "FROM PdfUrl pu " +
-                "WHERE pu.id = :id";
+        "(p.productNo," +
+                "p.url,"+
+                "p.pdfName," +
+                "p.pName," +
+                "p.category," +
+                "p.description," +
+                "p.imageName," +
+                "p.pBrand," +
+                "p.subDescription," +
+                "p.spec) " +
+                "FROM ProductNew p " +
+                "WHERE p.productNo = :id";
         TypedQuery<ProductPdfDetailDto> query = entityManager.createQuery(
                 queryString, ProductPdfDetailDto.class
         );

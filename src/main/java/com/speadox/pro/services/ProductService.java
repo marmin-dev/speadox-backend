@@ -43,6 +43,7 @@ public class ProductService {
             }
             return newDtos;
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println(LocalDateTime.now());
             System.out.println("getMainList Exception");
         }
