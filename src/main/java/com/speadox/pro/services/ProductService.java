@@ -1,10 +1,9 @@
 package com.speadox.pro.services;
 
-import com.speadox.pro.daos.PdfDao;
 import com.speadox.pro.daos.ProductDao;
 import com.speadox.pro.dtos.*;
-import com.speadox.pro.repositories.PdfRepository;
-import com.speadox.pro.repositories.ProductRepository;
+
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +16,8 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private final ProductRepository pRepository;
-    private final PdfRepository repository;
     private final ProductDao productDao;
-    private final PdfDao pdfDao;
+
 
     // 메인페이지 사진 가져오는 로직
     public List<ProductMainDto> getMainList(String company){
@@ -66,7 +63,7 @@ public class ProductService {
     public ProductPdfDetailDto getProductDetail(Long id){
         ProductPdfDetailDto dto  = new ProductPdfDetailDto();
         try{
-            dto = pdfDao.getProductDetail(id);
+            dto = productDao.getProductDetail(id);
         }catch (Exception e){
             e.printStackTrace();
         }
