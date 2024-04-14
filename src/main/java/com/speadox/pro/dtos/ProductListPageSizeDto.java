@@ -13,6 +13,8 @@ public class ProductListPageSizeDto {
 
     int maxPage;
 
+    int resultSize;
+
     List<ProductListDto> dtos;
 
 }

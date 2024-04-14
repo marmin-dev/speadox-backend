@@ -52,7 +52,7 @@ public class ProductDao {
         query.setFirstResult(firstResult);
         query.setMaxResults(pageSize);
 
-        return new ProductListPageSizeDto(maxPage, query.getResultList());
+        return new ProductListPageSizeDto(maxPage, maxPage, query.getResultList());
     }
 
     public ProductListPageSizeDto getListBySearch(String category, String keyword, int pageNumber){
@@ -80,7 +80,7 @@ public class ProductDao {
         query.setFirstResult(firstResult);
         query.setMaxResults(pageSize);
 
-        return new ProductListPageSizeDto(maxPage, query.getResultList());
+        return new ProductListPageSizeDto(maxPage, maxPage, query.getResultList());
     }
 
     public ProductPdfDetailDto getProductDetail(Long id){
