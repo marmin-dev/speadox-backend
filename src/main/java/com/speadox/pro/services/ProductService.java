@@ -28,7 +28,7 @@ public class ProductService {
         try{
             List<ProductMainDto> dtos = productDao.getMainList(company);
             while(randomList.size() < 9){
-                int rand = random.nextInt(dtos.size() + 1);
+                int rand = random.nextInt(dtos.size());
                 if (randomList.contains(rand)){
                     continue;
                 }else{
